@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ thống quản lý học viên CODEGYM</title>
+
+    <!-- CSS tùy chỉnh -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome cho biểu tượng -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- jQuery & DataTables -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css"/>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+</head>
+<body>
+<h1>Hệ thống quản lý học viên CODEGYM</h1>
+
+<div class="form-container">
+    <!-- Form nhập học viên -->
+    <div class="form">
+        <form id="formNhap" onsubmit="return btnADD(event)">
+            <h3>Nhập thông tin học viên</h3>
+
+            <label for="inputMssv">Mã học viên</label>
+            <input type="text" id="inputMssv" class="inputMssv" required>
+
+            <label for="inputName">Họ và tên</label>
+            <input type="text" id="inputName" class="inputName" required>
+
+            <label for="inputClass">Lớp</label>
+            <select id="inputClass" class="inputClass" required>
+                <option value="">---- Chọn lớp ----</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Java">Java</option>
+            </select>
+
+            <label for="inputEmail">Email</label>
+            <input type="email" id="inputEmail" class="inputEmail" required>
+
+            <label for="inputBirthday">Ngày sinh</label>
+            <input type="date" id="inputBirthday" class="inputBirthday" required>
+
+            <div class="button">
+                <button type="submit" id="btnAddBtn">Thêm mới học viên</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="form1">
+        <!-- Form tìm kiếm -->
+        <form class="formTimKiem" onsubmit="btnSEARCH(event)">
+            <h3>Tìm kiếm học viên</h3>
+
+            <label for="inputSearch">Từ khóa tìm kiếm</label>
+            <div class="search">
+                <input type="text" id="inputSearch" placeholder="Tìm theo tên, lớp, mã hoặc email..." required>
+                <button type="submit">Tìm kiếm</button>
+                <button type="button" onclick="resetSearch()">Hiển thị tất cả</button>
+            </div>
+        </form>
+        <!-- Bảng danh sách học viên -->
+        <table id="table_id" class="display">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã học viên</th>
+                <th>Họ và tên</th>
+                <th>Lớp</th>
+                <th>Email</th>
+                <th>Ngày sinh</th>
+                <th colspan="2">Thao tác</th>
+            </tr>
+            </thead>
+            <tbody id="productList"></tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Script xử lý -->
+<script src="script.js"></script>
+
+<!-- Khởi tạo DataTable -->
+<script>
+    $(document).ready(function () {
+        $('#table_id').DataTable({
+            paging: false,
+            info: false,
+            searching: false,
+            columnDefs: [
+                {orderable: false, targets: [6, 7]}
+            ]
+        });
+    });
+</script>
+</body>
+</html>
